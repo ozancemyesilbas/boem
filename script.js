@@ -75,3 +75,42 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var navToggle = document.querySelector(".nav-toggle");
+    var navbar = document.querySelector(".navbar");
+    var navLinks = document.querySelectorAll(".nav-center a");
+
+    if (navToggle && navbar) {
+        navToggle.addEventListener("click", function () {
+            navbar.classList.toggle("menu-open");
+        });
+    }
+
+    // Linke tıklayınca menüyü kapat (mobilde güzel durur)
+    navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+            if (navbar.classList.contains("menu-open")) {
+                navbar.classList.remove("menu-open");
+            }
+        });
+    });
+});
