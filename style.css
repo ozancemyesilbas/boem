@@ -3677,3 +3677,173 @@ body {
         font-size: 2rem;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   HAMBURGER MENÜ – GENEL
+   =========================== */
+
+.nav-toggle {
+    display: none;
+    /* desktop’ta gizli */
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    background: transparent;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    outline: none;
+}
+
+/* 3 çizgi */
+.nav-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background-color: currentColor;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-toggle span+span {
+    margin-top: 4px;
+}
+
+/* ===========================
+   MOBİL NAVBAR
+   =========================== */
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 16px;
+    }
+
+    /* Hamburger mobilde gözüksün */
+    .nav-toggle {
+        display: inline-flex;
+    }
+
+    /* Menü bloğunu dropdown gibi kullanacağız */
+    .nav-center {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #ffffff;
+        color: var(--brand-blue);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 16px 16px;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+
+        max-height: 0;
+        /* kapalı */
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.25s ease, opacity 0.2s ease;
+    }
+
+    /* Menü açıldığında */
+    .navbar.menu-open .nav-center {
+        max-height: 600px;
+        /* içeriğe göre yeterince büyük bir değer */
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Linkler tam genişlikte, dikey */
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-item>a {
+        display: block;
+        width: 100%;
+        padding: 6px 0;
+    }
+
+    /* Alt çizgi hover efektini sadeleştir */
+    .nav-item>a::after {
+        bottom: -2px;
+    }
+
+    /* Dropdown’ları mobilde inline göster (hover’a gerek kalmasın) */
+    .nav-item.has-dropdown>.dropdown-menu {
+        position: static;
+        margin-top: 4px;
+        padding: 0 0 6px;
+        background: transparent;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .nav-item.has-dropdown>.dropdown-menu a {
+        padding: 3px 0 3px 10px;
+        font-size: 0.85rem;
+        color: #475569;
+        white-space: normal;
+    }
+
+    /* Yana açılan submenu’ler de alta insin */
+    .dropdown-menu.submenu {
+        position: static;
+        margin: 2px 0 0 10px;
+    }
+
+    /* Hero üzerindeyken de alt çizgi rengi mavi olsun ki beyaz arka planda kaybolmasın */
+    .navbar:not(.navbar-scrolled) .nav-item>a::after {
+        background-color: var(--brand-blue);
+    }
+}
+
+/* Hamburger X animasyonu (opsiyonel ama şık :) ) */
+@media (max-width: 768px) {
+    .navbar.menu-open .nav-toggle span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .navbar.menu-open .nav-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar.menu-open .nav-toggle span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+}
