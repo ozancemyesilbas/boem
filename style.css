@@ -3463,3 +3463,217 @@ body {
         min-height: 220px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   MOBİL İYİLEŞTİRMELER (max 768px)
+   Mevcut kuralları SİLME, sadece bunu EN ALTA ekle.
+   =========================== */
+
+@media (max-width: 768px) {
+
+    /* Genel metin boyutu biraz küçülsün */
+    body {
+        font-size: 14px;
+    }
+
+    /* NAVBAR – satır kırabilsin, menü logo altına insin */
+    .navbar {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+
+    .nav-left .logo {
+        font-size: 1.1rem;
+    }
+
+    .nav-center {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        /* menü elemanları aşağı kayabilsin */
+        gap: 14px;
+        font-size: 0.85rem;
+    }
+
+    .nav-item {
+        padding-right: 8px;
+    }
+
+    /* Dropdown’ları mobilde normal liste gibi göster
+       (hover’a ihtiyaç kalmasın, her şey dikey okunur olsun) */
+    .nav-item.has-dropdown>.dropdown-menu {
+        position: static;
+        right: auto;
+        left: auto;
+        margin-top: 6px;
+        box-shadow: none;
+        background: transparent;
+        padding: 0;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .nav-item.has-dropdown>.dropdown-menu a {
+        padding: 4px 0;
+        display: block;
+        font-size: 0.8rem;
+        color: inherit;
+        white-space: normal;
+    }
+
+    /* Sağdan açılan alt dropdown’u da blok gibi alta alsın */
+    .dropdown-menu.submenu {
+        position: static;
+        margin: 4px 0 0;
+    }
+
+    /* HERO – içerik taşmasın, başlık küçülsün */
+    .hero {
+        padding: 0 16px 56px;
+        min-height: 80vh;
+        align-items: flex-end;
+    }
+
+    .hero-content {
+        margin-top: 96px;
+        /* sabit navbar için boşluk */
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        font-size: 2.1rem;
+    }
+
+    .hero-text {
+        font-size: 0.95rem;
+        max-width: 100%;
+    }
+
+    .hero-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 8px 14px;
+        font-size: 0.82rem;
+    }
+
+    /* Tüm büyük container’ların iç padding’ini daraltalım */
+    .container,
+    .container-work,
+    .work-container1,
+    .services-container1,
+    .exhibit-container,
+    .exhibitor-services-container,
+    .rental-container,
+    .rental-steps-container,
+    .growth-container,
+    .whatwedo-container,
+    .impact-container5,
+    .dei-container6,
+    .dei-extra-container7,
+    .sustainable-container8,
+    .partner-cta-inner9,
+    .brands-container10,
+    .contact-container11,
+    .show-search-container12,
+    .show-start-container12,
+    .portfolio-container {
+        padding: 0 16px;
+    }
+
+    /* Grid’lerde boşlukları mobilde biraz sıklaştıralım */
+    .awards-grid,
+    .portfolio-grid,
+    .brands-grid10,
+    .show-start-grid12,
+    .contact-grid-top11,
+    .contact-grid-bottom11 {
+        gap: 16px;
+    }
+
+    /* Kart yüksekliklerini telefon için biraz küçült */
+    .portfolio-card,
+    .show-card12 {
+        height: 260px;
+    }
+
+    /* Çok büyük başlıkları biraz küçült */
+    .portfolio-title,
+    .impact-title5,
+    .exhibit-heading,
+    .services-heading1 {
+        font-size: 2rem;
+    }
+}
