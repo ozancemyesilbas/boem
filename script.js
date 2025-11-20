@@ -93,11 +93,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
 document.addEventListener("DOMContentLoaded", function () {
     var navToggle = document.querySelector(".nav-toggle");
     var navbar = document.querySelector(".navbar");
-    var navLinks = document.querySelectorAll(".nav-center a");
 
     if (navToggle && navbar) {
         navToggle.addEventListener("click", function () {
@@ -105,10 +103,38 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Linke tıklayınca menüyü kapat (mobilde güzel durur)
+    // Ana dropdown başlıkları (Etkinlik Hizmetleri, Hakkımızda)
+    var dropdownTriggers = document.querySelectorAll(".nav-item.has-dropdown > a");
+
+    dropdownTriggers.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault(); // sayfa değiştirmesin
+                var parent = this.parentElement;
+                parent.classList.toggle("is-open");
+            }
+        });
+    });
+
+    // Alt seviye dropdown’lar (Prodüksiyon, Sergi & Stand Tasarımları)
+    var subDropdownTriggers = document.querySelectorAll(".dropdown-item.has-submenu > a");
+
+    subDropdownTriggers.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                var parent = this.parentElement;
+                parent.classList.toggle("is-open");
+            }
+        });
+    });
+
+    // Normal linke tıklayınca menüyü kapat (mobilde)
+    var navLinks = document.querySelectorAll(".nav-center a[href]");
+
     navLinks.forEach(function (link) {
         link.addEventListener("click", function () {
-            if (navbar.classList.contains("menu-open")) {
+            if (window.innerWidth <= 768 && navbar && navbar.classList.contains("menu-open")) {
                 navbar.classList.remove("menu-open");
             }
         });

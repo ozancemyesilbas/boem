@@ -3558,10 +3558,8 @@ body {
 
 
 
-
-
 /* ===========================
-   HAMBURGER MENÜ – TEMEL
+   HAMBURGER – GENEL
    =========================== */
 
 .nav-toggle {
@@ -3597,32 +3595,21 @@ body {
 
 
 /* ===========================
-   MOBİL İYİLEŞTİRMELER + MENÜ
+   MOBİL NAVBAR & GENEL (≤768)
    =========================== */
 
 @media (max-width: 768px) {
 
-    /* Genel font biraz küçülsün */
     body {
         font-size: 14px;
     }
 
-    /* Header mobilde sabit dursun ama kırpılmasın */
-    .site-header {
-        top: 0;
-        left: 0;
-        right: 0;
-    }
-
-    /* NAVBAR – yükseklik/padding sabit */
     .navbar {
         padding: 10px 16px;
-        flex-wrap: nowrap;
     }
 
     .navbar-scrolled {
         padding: 10px 16px;
-        /* scroll olsa da aynı kalsın */
         background-color: #ffffff;
         color: var(--brand-blue);
         box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
@@ -3632,12 +3619,12 @@ body {
         font-size: 1.1rem;
     }
 
-    /* Hamburger mobilde gözüksün, daha şık görünüm */
+    /* Hamburger mobilde görünsün */
     .nav-toggle {
         display: inline-flex;
     }
 
-    /* Scroll sonrası (beyaz header) hamburger renkleri değişsin */
+    /* Scroll sonrası hamburger rengi */
     .navbar.navbar-scrolled .nav-toggle {
         background: #ffffff;
         border-color: var(--brand-blue);
@@ -3647,98 +3634,115 @@ body {
         background-color: var(--brand-blue);
     }
 
-    /* Menü paneli – açılır kapanır alan */
+    /* ===== FULL SCREEN MENÜ PANELİ ===== */
+
     .nav-center {
-        position: absolute;
-        top: 100%;
+        position: fixed;
         left: 0;
         right: 0;
+        top: 60px;
+        /* header yüksekliği yaklaşık */
+        bottom: 0;
         background-color: #ffffff;
         color: var(--brand-blue);
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-        padding: 10px 16px 14px;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.1);
 
-        max-height: 0;
-        /* kapalı hali */
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        padding: 24px 24px 32px;
+        gap: 4px;
+        overflow-y: auto;
+
+        transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
-        transition: max-height 0.25s ease, opacity 0.2s ease;
+        transition: transform 0.25s ease, opacity 0.2s ease;
+
         margin-left: 0;
-        /* önceki mobil ayarını override */
+        /* önceki mobil ayarını override et */
     }
 
-    /* Menü açıldığında */
     .navbar.menu-open .nav-center {
-        max-height: 800px;
-        /* yeterince büyük bir limit */
+        transform: translateY(0);
         opacity: 1;
         pointer-events: auto;
     }
 
-    /* Menü satırları – dikey ve hizalı */
+    /* Üst seviye kalemler: Etkinlik Hizmetleri, Projeler, Hakkımızda, İletişim */
+
     .nav-item {
         width: 100%;
+        text-align: center;
         padding-right: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        margin-bottom: 8px;
     }
 
     .nav-item>a {
         display: block;
         width: 100%;
         padding: 6px 0;
+        font-size: 1.05rem;
+        font-weight: 700;
+        text-align: center;
     }
 
+    /* Alt çizgi animasyonunu mobilde iptal et */
     .nav-item>a::after {
-        bottom: -2px;
+        display: none;
     }
 
-    /* Dropdown’lar da dikey + içerden hafif girintili */
-    .nav-item.has-dropdown>.dropdown-menu {
+    /* ===== DROPDOWN LOGİĞİ – TIKLAYINCA AÇILSIN ===== */
+
+    /* Varsayılan: kapalı */
+    .nav-item.has-dropdown>.dropdown-menu,
+    .dropdown-item.has-submenu>.dropdown-menu.submenu {
         position: static;
         right: auto;
         left: auto;
-        margin-top: 0;
-        padding: 0 0 8px;
+        margin: 0;
+        padding: 0;
+        min-width: 0;
         background: transparent;
         box-shadow: none;
+        border-radius: 0;
         opacity: 1;
         visibility: visible;
         transform: none;
-        width: 100%;
+        display: none;
     }
 
-    .nav-item.has-dropdown>.dropdown-menu a {
-        padding: 3px 0 3px 14px;
+    /* Açık olanlar */
+    .nav-item.has-dropdown.is-open>.dropdown-menu {
         display: block;
-        font-size: 0.85rem;
-        color: #475569;
+    }
+
+    .dropdown-item.has-submenu.is-open>.dropdown-menu.submenu {
+        display: block;
+    }
+
+    /* Etkinlik Hizmetleri / Hakkımızda alt kalemleri */
+    .nav-item.has-dropdown>.dropdown-menu a {
+        padding: 4px 0;
+        font-size: 0.96rem;
+        font-weight: 400;
+        color: #4b5563;
+        text-align: center;
         white-space: normal;
     }
 
-    /* Yana açılan submenu’ler de alta insin, ekstra girinti ve çizgi */
-    .dropdown-menu.submenu {
-        position: static;
-        margin: 2px 0 0 14px;
-        border-left: 1px solid #e5e7eb;
-        padding-left: 10px;
-    }
-
+    /* Prodüksiyon altındaki Studio Blue / Stage Rigging vb. */
     .dropdown-menu.submenu a {
-        padding-left: 0;
+        font-size: 0.9rem;
     }
 
-    /* Hero üzerindeyken çizgi rengi kaybolmasın */
-    .navbar:not(.navbar-scrolled) .nav-item>a::after {
-        background-color: var(--brand-blue);
+    .dropdown-item.has-submenu {
+        margin-top: 4px;
     }
 
-    /* HERO – içerik taşmasın */
+    /* ===== HERO VE DİĞER GENEL AYARLAR ===== */
+
     .hero {
         padding: 0 16px 56px;
         min-height: 80vh;
@@ -3747,7 +3751,7 @@ body {
 
     .hero-content {
         margin-top: 96px;
-        /* sabit navbar için boşluk */
+        /* sabit navbar boşluğu */
         max-width: 100%;
     }
 
@@ -3771,7 +3775,7 @@ body {
         font-size: 0.82rem;
     }
 
-    /* Tüm büyük container’ların iç padding’lerini daraltalım */
+    /* Container padding’leri */
     .container,
     .container-work,
     .work-container1,
@@ -3795,7 +3799,6 @@ body {
         padding: 0 16px;
     }
 
-    /* Grid boşluklarını mobilde biraz sıkılaştır */
     .awards-grid,
     .portfolio-grid,
     .brands-grid10,
@@ -3805,13 +3808,11 @@ body {
         gap: 16px;
     }
 
-    /* Kart yükseklikleri */
     .portfolio-card,
     .show-card12 {
         height: 260px;
     }
 
-    /* Büyük başlıklar */
     .portfolio-title,
     .impact-title5,
     .exhibit-heading,
