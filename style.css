@@ -3554,12 +3554,8 @@ body {
 
 
 
-
-
-
-
 /* ===========================
-   HAMBURGER – GENEL
+   HAMBURGER BUTON – GENEL
    =========================== */
 
 .nav-toggle {
@@ -3595,7 +3591,7 @@ body {
 
 
 /* ===========================
-   MOBİL NAVBAR & GENEL (≤768)
+   MOBİL NAVBAR & DRAWER (≤768px)
    =========================== */
 
 @media (max-width: 768px) {
@@ -3604,6 +3600,7 @@ body {
         font-size: 14px;
     }
 
+    /* NAVBAR – üstte sabit, padding sabit */
     .navbar {
         padding: 10px 16px;
     }
@@ -3634,74 +3631,76 @@ body {
         background-color: var(--brand-blue);
     }
 
-    /* ===== FULL SCREEN MENÜ PANELİ ===== */
-
+    /* ===== SAĞDAN KAYAN DRAWER MENÜ ===== */
     .nav-center {
         position: fixed;
-        left: 0;
-        right: 0;
-        top: 60px;
-        /* header yüksekliği yaklaşık */
+        top: 0;
         bottom: 0;
+        right: 0;
+        /* Ekranın yaklaşık yarısını kaplasın */
+        width: min(320px, 70vw);
+
         background-color: #ffffff;
         color: var(--brand-blue);
+        box-shadow: -6px 0 18px rgba(15, 23, 42, 0.25);
 
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: flex-start;
 
-        padding: 24px 24px 32px;
-        gap: 4px;
+        padding: 24px 20px 32px;
+        gap: 8px;
         overflow-y: auto;
+        z-index: 1200;
 
-        transform: translateY(-100%);
+        /* Başlangıçta sağa gizli */
+        transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
         transition: transform 0.25s ease, opacity 0.2s ease;
 
         margin-left: 0;
-        /* önceki mobil ayarını override et */
+        /* önceki mobil ayarlarını ezsin */
     }
 
+    /* Menü açıkken */
     .navbar.menu-open .nav-center {
-        transform: translateY(0);
+        transform: translateX(0);
         opacity: 1;
         pointer-events: auto;
     }
 
-    /* Üst seviye kalemler: Etkinlik Hizmetleri, Projeler, Hakkımızda, İletişim */
-
+    /* Üst seviye item'lar (Etkinlik Hizmetleri, Projeler, Hakkımızda, İletişim) */
     .nav-item {
         width: 100%;
-        text-align: center;
+        text-align: left;
         padding-right: 0;
-        margin-bottom: 8px;
     }
 
     .nav-item>a {
         display: block;
         width: 100%;
         padding: 6px 0;
-        font-size: 1.05rem;
+        font-size: 1rem;
         font-weight: 700;
-        text-align: center;
+        text-align: left;
     }
 
-    /* Alt çizgi animasyonunu mobilde iptal et */
+    /* Alt çizgi animasyonunu mobilde kapat */
     .nav-item>a::after {
         display: none;
     }
 
-    /* ===== DROPDOWN LOGİĞİ – TIKLAYINCA AÇILSIN ===== */
+    /* ===== ALT BAŞLIKLAR – HER ZAMAN AÇIK ===== */
 
-    /* Varsayılan: kapalı */
-    .nav-item.has-dropdown>.dropdown-menu,
-    .dropdown-item.has-submenu>.dropdown-menu.submenu {
+    /* Etkinlik Hizmetleri / Hakkımızda alt menüleri */
+    .nav-item.has-dropdown>.dropdown-menu {
         position: static;
         right: auto;
         left: auto;
-        margin: 0;
+        top: auto;
+        margin: 2px 0 8px;
         padding: 0;
         min-width: 0;
         background: transparent;
@@ -3710,38 +3709,49 @@ body {
         opacity: 1;
         visibility: visible;
         transform: none;
-        display: none;
-    }
-
-    /* Açık olanlar */
-    .nav-item.has-dropdown.is-open>.dropdown-menu {
         display: block;
+        /* her zaman açık */
+        width: 100%;
     }
 
-    .dropdown-item.has-submenu.is-open>.dropdown-menu.submenu {
-        display: block;
-    }
-
-    /* Etkinlik Hizmetleri / Hakkımızda alt kalemleri */
     .nav-item.has-dropdown>.dropdown-menu a {
-        padding: 4px 0;
-        font-size: 0.96rem;
+        display: block;
+        padding: 3px 0 3px 14px;
+        font-size: 0.92rem;
         font-weight: 400;
         color: #4b5563;
-        text-align: center;
+        text-align: left;
         white-space: normal;
     }
 
-    /* Prodüksiyon altındaki Studio Blue / Stage Rigging vb. */
+    /* Prodüksiyon altındaki submenu (Studio Blue, Stage Rigging vb.) */
+    .dropdown-item.has-submenu>.dropdown-menu.submenu {
+        position: static;
+        margin: 2px 0 4px 18px;
+        padding: 0;
+        min-width: 0;
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: block;
+        /* her zaman açık */
+        border-left: 1px solid #e5e7eb;
+        padding-left: 10px;
+    }
+
     .dropdown-menu.submenu a {
+        padding-left: 0;
         font-size: 0.9rem;
     }
 
-    .dropdown-item.has-submenu {
-        margin-top: 4px;
+    .dropdown-item.has-submenu>a {
+        padding-left: 14px;
     }
 
-    /* ===== HERO VE DİĞER GENEL AYARLAR ===== */
+    /* ===== HERO VE GENEL PADDING’LER ===== */
 
     .hero {
         padding: 0 16px 56px;
@@ -3775,7 +3785,7 @@ body {
         font-size: 0.82rem;
     }
 
-    /* Container padding’leri */
+    /* İçerik container’larını daralt */
     .container,
     .container-work,
     .work-container1,
