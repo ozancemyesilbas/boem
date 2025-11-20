@@ -83,6 +83,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     var navToggle = document.querySelector(".nav-toggle");
     var navbar = document.querySelector(".navbar");
@@ -107,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Alt seviye dropdown’lar (Prodüksiyon, Sergi & Stand Tasarımları)
+    // Alt seviye dropdown’lar (Sergi & Stand Tasarımları)
     var subDropdownTriggers = document.querySelectorAll(".dropdown-item.has-submenu > a");
 
     subDropdownTriggers.forEach(function (link) {
@@ -120,13 +147,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Mobilde bir linke tıklanınca menüyü kapat (aynı sayfa içi anchor için de işe yarar)
+    // MENÜ SADECE "GERÇEK" LİNKE BASILINCA KAPANSIN
     var navLinks = document.querySelectorAll(".nav-center a");
     navLinks.forEach(function (link) {
         link.addEventListener("click", function () {
-            if (window.innerWidth <= 768 && navbar && navbar.classList.contains("menu-open")) {
-                navbar.classList.remove("menu-open");
+            if (window.innerWidth > 768) return;
+            if (!navbar || !navbar.classList.contains("menu-open")) return;
+
+            var parent = link.parentElement;
+
+            // Eğer bu link bir dropdown başlığı ise
+            // (.has-dropdown veya .has-submenu içinde) menüyü kapatma
+            if (parent && (parent.classList.contains("has-dropdown") ||
+                           parent.classList.contains("has-submenu"))) {
+                return;
             }
+
+            // Diğer tüm linklerde (Projeler, Etkinlik Teknolojileri, Hikayemiz, İletişim vs.)
+            // menüyü kapat
+            navbar.classList.remove("menu-open");
         });
     });
 
