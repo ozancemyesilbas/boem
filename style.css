@@ -3551,9 +3551,6 @@ body {
 
 
 
-
-
-
 /* ===========================
    HAMBURGER BUTON – GENEL
    =========================== */
@@ -3564,24 +3561,22 @@ body {
     margin-left: auto;
     width: 40px;
     height: 40px;
-    border-radius: 999px;
-    border: 1.5px solid rgba(255, 255, 255, 0.7);
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(6px);
+    border: none;
+    background: transparent;
     cursor: pointer;
-    align-items: center;
-    justify-content: center;
     padding: 0;
     outline: none;
+    display: none;
+    /* mobilde açacağız */
 }
 
 /* 3 çizgi */
 .nav-toggle span {
     display: block;
-    width: 18px;
+    width: 20px;
     height: 2px;
     border-radius: 999px;
-    background-color: #ffffff;
+    background-color: currentColor;
     transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
@@ -3591,7 +3586,7 @@ body {
 
 
 /* ===========================
-   MOBİL NAVBAR & DRAWER (≤768px)
+   MOBİL NAVBAR & MENÜ (≤768px)
    =========================== */
 
 @media (max-width: 768px) {
@@ -3600,7 +3595,7 @@ body {
         font-size: 14px;
     }
 
-    /* NAVBAR – üstte sabit, padding sabit */
+    /* Üst bar */
     .navbar {
         padding: 10px 16px;
     }
@@ -3616,92 +3611,126 @@ body {
         font-size: 1.1rem;
     }
 
-    /* Hamburger mobilde görünsün */
+    /* Hamburger mobilde gözüksün */
     .nav-toggle {
         display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
     }
 
-    /* Scroll sonrası hamburger rengi */
     .navbar.navbar-scrolled .nav-toggle {
-        background: #ffffff;
-        border-color: var(--brand-blue);
+        color: var(--brand-blue);
     }
 
-    .navbar.navbar-scrolled .nav-toggle span {
-        background-color: var(--brand-blue);
-    }
-
-    /* ===== SAĞDAN KAYAN DRAWER MENÜ ===== */
+    /* ===== TAM EKRAN OVERLAY MENÜ ===== */
     .nav-center {
         position: fixed;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        /* Ekranın yaklaşık yarısını kaplasın */
-        width: min(320px, 70vw);
-
+        inset: 0;
         background-color: #ffffff;
         color: var(--brand-blue);
-        box-shadow: -6px 0 18px rgba(15, 23, 42, 0.25);
-
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         justify-content: flex-start;
-
-        padding: 24px 20px 32px;
-        gap: 8px;
+        padding: 80px 20px 24px;
+        /* üstte logo + X için boşluk */
+        gap: 6px;
         overflow-y: auto;
         z-index: 1200;
 
-        /* Başlangıçta sağa gizli */
-        transform: translateX(100%);
+        transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
-        transition: transform 0.25s ease, opacity 0.2s ease;
+        transition: transform 0.28s ease, opacity 0.2s ease;
 
         margin-left: 0;
-        /* önceki mobil ayarlarını ezsin */
+        /* desktop ayarını ezsin */
     }
 
-    /* Menü açıkken */
     .navbar.menu-open .nav-center {
-        transform: translateX(0);
+        transform: translateY(0);
         opacity: 1;
         pointer-events: auto;
     }
 
-    /* Üst seviye item'lar (Etkinlik Hizmetleri, Projeler, Hakkımızda, İletişim) */
+    /* Üst bar menü açıkken beyaz olsun */
+    .navbar.menu-open {
+        background-color: #ffffff;
+        color: var(--brand-blue);
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+    }
+
+    .navbar.menu-open .nav-toggle {
+        color: var(--brand-blue);
+    }
+
+    /* =======================
+       ÜST SEVİYE MADDELER
+       ======================= */
+
     .nav-item {
         width: 100%;
-        text-align: left;
-        padding-right: 0;
+        padding: 6px 0 8px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
     }
 
     .nav-item>a {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
-        padding: 6px 0;
+        padding: 4px 0;
         font-size: 1rem;
         font-weight: 700;
         text-align: left;
     }
 
-    /* Alt çizgi animasyonunu mobilde kapat */
+    /* Desktop’taki alt çizgi efektini kapat */
     .nav-item>a::after {
+        content: none;
+    }
+
+    /* Dropdown olmayan maddelerde ok olmasın */
+    .nav-item:not(.has-dropdown)>a span.menu-arrow {
         display: none;
     }
 
-    /* ===== ALT BAŞLIKLAR – HER ZAMAN AÇIK ===== */
+    /* =======================
+       DROPDOWN OK İKONLARI
+       ======================= */
 
-    /* Etkinlik Hizmetleri / Hakkımızda alt menüleri */
+    /* Ok için ekstra span eklemeden, pseudo ile yapalım */
+    .nav-item.has-dropdown>a::before {
+        content: "";
+        flex-shrink: 0;
+        width: 8px;
+        height: 8px;
+        border-style: solid;
+        border-width: 0 2px 2px 0;
+        border-color: var(--brand-blue);
+        transform: rotate(45deg);
+        margin-left: 8px;
+        transition: transform 0.2s ease;
+    }
+
+    .nav-item.has-dropdown.is-open>a::before {
+        transform: rotate(-135deg);
+    }
+
+    /* =======================
+       ALT MENÜLER
+       ======================= */
+
+    /* Başlangıçta kapalı */
     .nav-item.has-dropdown>.dropdown-menu {
         position: static;
-        right: auto;
-        left: auto;
-        top: auto;
-        margin: 2px 0 8px;
-        padding: 0;
+        margin: 0;
+        padding: 0 0 4px;
         min-width: 0;
         background: transparent;
         box-shadow: none;
@@ -3709,14 +3738,17 @@ body {
         opacity: 1;
         visibility: visible;
         transform: none;
-        display: block;
-        /* her zaman açık */
+        display: none;
         width: 100%;
+    }
+
+    .nav-item.has-dropdown.is-open>.dropdown-menu {
+        display: block;
     }
 
     .nav-item.has-dropdown>.dropdown-menu a {
         display: block;
-        padding: 3px 0 3px 14px;
+        padding: 4px 0 4px 14px;
         font-size: 0.92rem;
         font-weight: 400;
         color: #4b5563;
@@ -3724,11 +3756,36 @@ body {
         white-space: normal;
     }
 
-    /* Prodüksiyon altındaki submenu (Studio Blue, Stage Rigging vb.) */
+    /* === 2. seviye (Prodüksiyon altı) === */
+
+    .dropdown-item.has-submenu>a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 14px;
+    }
+
+    .dropdown-item.has-submenu>a::after {
+        content: "";
+        flex-shrink: 0;
+        width: 7px;
+        height: 7px;
+        border-style: solid;
+        border-width: 0 2px 2px 0;
+        border-color: #4b5563;
+        transform: rotate(45deg);
+        margin-left: 6px;
+        transition: transform 0.2s ease;
+    }
+
+    .dropdown-item.has-submenu.is-open>a::after {
+        transform: rotate(-135deg);
+    }
+
     .dropdown-item.has-submenu>.dropdown-menu.submenu {
         position: static;
         margin: 2px 0 4px 18px;
-        padding: 0;
+        padding: 0 0 0 10px;
         min-width: 0;
         background: transparent;
         box-shadow: none;
@@ -3736,10 +3793,12 @@ body {
         opacity: 1;
         visibility: visible;
         transform: none;
-        display: block;
-        /* her zaman açık */
+        display: none;
         border-left: 1px solid #e5e7eb;
-        padding-left: 10px;
+    }
+
+    .dropdown-item.has-submenu.is-open>.dropdown-menu.submenu {
+        display: block;
     }
 
     .dropdown-menu.submenu a {
@@ -3747,90 +3806,10 @@ body {
         font-size: 0.9rem;
     }
 
-    .dropdown-item.has-submenu>a {
-        padding-left: 14px;
-    }
+    /* =======================
+       HAMBURGER → X ANİMASYONU
+       ======================= */
 
-    /* ===== HERO VE GENEL PADDING’LER ===== */
-
-    .hero {
-        padding: 0 16px 56px;
-        min-height: 80vh;
-        align-items: flex-end;
-    }
-
-    .hero-content {
-        margin-top: 96px;
-        /* sabit navbar boşluğu */
-        max-width: 100%;
-    }
-
-    .hero h1 {
-        font-size: 2.1rem;
-    }
-
-    .hero-text {
-        font-size: 0.95rem;
-        max-width: 100%;
-    }
-
-    .hero-actions {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-        padding: 8px 14px;
-        font-size: 0.82rem;
-    }
-
-    /* İçerik container’larını daralt */
-    .container,
-    .container-work,
-    .work-container1,
-    .services-container1,
-    .exhibit-container,
-    .exhibitor-services-container,
-    .rental-container,
-    .rental-steps-container,
-    .growth-container,
-    .whatwedo-container,
-    .impact-container5,
-    .dei-container6,
-    .dei-extra-container7,
-    .sustainable-container8,
-    .partner-cta-inner9,
-    .brands-container10,
-    .contact-container11,
-    .show-search-container12,
-    .show-start-container12,
-    .portfolio-container {
-        padding: 0 16px;
-    }
-
-    .awards-grid,
-    .portfolio-grid,
-    .brands-grid10,
-    .show-start-grid12,
-    .contact-grid-top11,
-    .contact-grid-bottom11 {
-        gap: 16px;
-    }
-
-    .portfolio-card,
-    .show-card12 {
-        height: 260px;
-    }
-
-    .portfolio-title,
-    .impact-title5,
-    .exhibit-heading,
-    .services-heading1 {
-        font-size: 2rem;
-    }
-
-    /* Hamburger X animasyonu */
     .navbar.menu-open .nav-toggle span:nth-child(1) {
         transform: translateY(6px) rotate(45deg);
     }

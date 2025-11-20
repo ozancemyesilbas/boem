@@ -87,11 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     var navToggle = document.querySelector(".nav-toggle");
     var navbar = document.querySelector(".navbar");
@@ -103,6 +98,32 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Ana dropdown başlıkları (Etkinlik Hizmetleri, Hakkımızda)
+    var dropdownTriggers = document.querySelectorAll(".nav-item.has-dropdown > a");
+
+    dropdownTriggers.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault(); // sayfa değiştirmesin
+                var parent = this.parentElement;
+                parent.classList.toggle("is-open");
+            }
+        });
+    });
+
+    // Alt seviye dropdown’lar (Prodüksiyon, Sergi & Stand Tasarımları)
+    var subDropdownTriggers = document.querySelectorAll(".dropdown-item.has-submenu > a");
+
+    subDropdownTriggers.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                var parent = this.parentElement;
+                parent.classList.toggle("is-open");
+            }
+        });
+    });
+
     // Ekran genişleyince (tablet / desktop) açık menüyü kapat
     window.addEventListener("resize", function () {
         if (window.innerWidth > 768 && navbar && navbar.classList.contains("menu-open")) {
@@ -110,3 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+
