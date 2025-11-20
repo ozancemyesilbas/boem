@@ -3569,34 +3569,71 @@ body {
 /* ===========================
    HAMBURGER BUTON – GENEL
    =========================== */
+/* Genel stil (desktop + mobil) */
 .nav-toggle {
     margin-left: auto;
     width: 40px;
     height: 40px;
     border: none;
     background: transparent;
+    /* mobilde override edeceğiz */
     cursor: pointer;
     padding: 0;
     outline: none;
     display: none;
-    /* desktop'ta gizli, mobilde açacağız */
+    /* sadece mobilde göstereceğiz */
     position: relative;
     z-index: 1301;
-    /* menü açıkken nav-center'ın üstünde kalsın */
 }
 
 /* 3 çizgi */
 .nav-toggle span {
     display: block;
     width: 22px;
-    height: 2px;
+    height: 3px;
     border-radius: 999px;
-    background-color: currentColor;
+    background-color: #ffffff;
+    /* daima beyaz */
     transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .nav-toggle span+span {
-    margin-top: 5px;
+    margin-top: 4px;
+}
+
+/* X animasyonu (değiştirmiyoruz) */
+.navbar.menu-open .nav-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.navbar.menu-open .nav-toggle span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar.menu-open .nav-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+/* ===========================
+   MOBİLDE GÖRÜNÜŞ (≤768px)
+   =========================== */
+@media (max-width: 768px) {
+
+    /* Hamburger mobilde görünsün ve koyu arka planlı olsun */
+    .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #111827;
+        /* koyu gri / siyah */
+        border-radius: 4px;
+        /* köşeleri hafif yuvarlak */
+    }
+
+    /* Scroll veya menü açıkken de aynı stil */
+    .navbar.navbar-scrolled .nav-toggle,
+    .navbar.menu-open .nav-toggle {
+        background-color: #111827;
+    }
 }
 
 
@@ -3683,123 +3720,134 @@ body {
 
        /* ... diğer mobil ayarların kalsın ... */
 
-       /* ÜST SEVİYE MADDELER */
-       .nav-item {
-           width: 100%;
-           padding: 6px 0 8px;
-           border-bottom: 1px solid #e5e7eb;
-       }
+       
 
-       .nav-item:last-child {
-           border-bottom: none;
-       }
+@media (max-width: 768px) {
 
-       .nav-item>a {
-           display: flex;
-           align-items: center;
-           justify-content: flex-start;
-           /* hepsi sola hizalı */
-           gap: 10px;
-           /* ok ile yazı arası boşluk */
-           width: 100%;
-           padding: 4px 0;
-           font-size: 1rem;
-           font-weight: 700;
-           text-align: left;
-       }
+        /* ... diğer mobil ayarların kalsın ... */
 
-       /* Ok olmayan (düz) maddeler de aynı hizada gözüksün */
-       .nav-item:not(.has-dropdown)>a {
-           padding-left: 18px;
-           /* ok + boşluk kadar içerden başlasın */
-       }
+        /* ÜST SEVİYE MADDELER */
+        .nav-item {
+            display: block;
+            /* flex değil, blok */
+            width: 100%;
+            padding: 6px 0 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
 
-       .nav-item>a::after {
-           content: none;
-       }
+        .nav-item:last-child {
+            border-bottom: none;
+        }
 
-       /* DROPDOWN OKLARI (sol tarafta küçük ok) */
-       .nav-item.has-dropdown>a::before {
-           content: "";
-           flex-shrink: 0;
-           width: 8px;
-           height: 8px;
-           border-style: solid;
-           border-width: 0 2px 2px 0;
-           border-color: var(--brand-blue);
-           transform: rotate(45deg);
-           margin-right: 8px;
-           margin-left: 0;
-           transition: transform 0.2s ease;
-       }
+        .nav-item>a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            width: 100%;
+            padding: 4px 0;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: left;
+        }
 
-       .nav-item.has-dropdown.is-open>a::before {
-           transform: rotate(-135deg);
-       }
+        /* Dropdown olmayanlar da aynı hizada olsun */
+        .nav-item:not(.has-dropdown)>a {
+            padding-left: 18px;
+        }
 
-       /* ALT MENÜDEKİ LİNKLER TAMAMEN ALT ALTA ve SOLA */
-       .nav-item.has-dropdown>.dropdown-menu {
-           position: static;
-           margin: 0;
-           padding: 0 0 4px;
-           min-width: 0;
-           background: transparent;
-           box-shadow: none;
-           border-radius: 0;
-           opacity: 1;
-           visibility: visible;
-           transform: none;
-           display: none;
-           width: 100%;
-       }
+        .nav-item>a::after {
+            content: none;
+        }
 
-       .nav-item.has-dropdown.is-open>.dropdown-menu {
-           display: block;
-       }
+        /* SOLDA OK İKONU */
+        .nav-item.has-dropdown>a::before {
+            content: "";
+            flex-shrink: 0;
+            width: 8px;
+            height: 8px;
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            border-color: var(--brand-blue);
+            transform: rotate(45deg);
+            margin-right: 8px;
+            margin-left: 0;
+            transition: transform 0.2s ease;
+        }
 
-       .nav-item.has-dropdown>.dropdown-menu a {
-           display: block;
-           padding: 4px 0 4px 14px;
-           font-size: 0.92rem;
-           font-weight: 400;
-           color: #4b5563;
-           text-align: left;
-           /* sağa kaymasın */
-           white-space: normal;
-       }
+        .nav-item.has-dropdown.is-open>a::before {
+            transform: rotate(-135deg);
+        }
 
-       /* 2. seviye (Sergi & Stand altındakiler) */
-       .dropdown-item.has-submenu>a {
-           display: flex;
-           align-items: center;
-           justify-content: space-between;
-           padding-left: 14px;
-       }
+        /* ====== ALT MENÜ AŞAĞI DOĞRU AÇILSIN ====== */
 
-       .dropdown-item.has-submenu>.dropdown-menu.submenu {
-           position: static;
-           margin: 2px 0 4px 18px;
-           padding: 0 0 0 10px;
-           min-width: 0;
-           background: transparent;
-           box-shadow: none;
-           border-radius: 0;
-           opacity: 1;
-           visibility: visible;
-           transform: none;
-           display: none;
-           border-left: 1px solid #e5e7eb;
-       }
+        .nav-item.has-dropdown>.dropdown-menu {
+            position: static;
+            width: 100%;
+            margin-top: 4px;
+            padding: 0 0 4px 26px;
+            /* biraz içerden başlasın */
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
 
-       .dropdown-item.has-submenu.is-open>.dropdown-menu.submenu {
-           display: block;
-       }
+            display: block;
+            /* her zaman block */
+            overflow: hidden;
+            max-height: 0;
+            /* kapalıyken görünmesin */
+            transition: max-height 0.25s ease;
+        }
 
-       .dropdown-menu.submenu a {
-           padding-left: 0;
-           font-size: 0.9rem;
-           text-align: left;
-       }
+        .nav-item.has-dropdown.is-open>.dropdown-menu {
+            max-height: 400px;
+            /* yeterince büyük bir değer */
+        }
+
+        .nav-item.has-dropdown>.dropdown-menu a {
+            display: block;
+            padding: 4px 0;
+            font-size: 0.92rem;
+            font-weight: 400;
+            color: #4b5563;
+            text-align: left;
+            white-space: normal;
+        }
+
+        /* 2. seviye (Sergi & Stand altı) */
+        .dropdown-item.has-submenu>a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 0;
+        }
+
+        .dropdown-item.has-submenu>.dropdown-menu.submenu {
+            position: static;
+            margin: 2px 0 4px 12px;
+            padding-left: 12px;
+            background: transparent;
+            box-shadow: none;
+            border-left: 1px solid #e5e7eb;
+
+            display: block;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.25s ease;
+        }
+
+        .dropdown-item.has-submenu.is-open>.dropdown-menu.submenu {
+            max-height: 300px;
+        }
+
+        .dropdown-menu.submenu a {
+            padding-left: 0;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+    }
+
+      
    }
 
 
