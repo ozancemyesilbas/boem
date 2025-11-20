@@ -83,10 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     var navToggle = document.querySelector(".nav-toggle");
     var navbar = document.querySelector(".navbar");
@@ -124,6 +120,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Mobilde bir linke tıklanınca menüyü kapat (aynı sayfa içi anchor için de işe yarar)
+    var navLinks = document.querySelectorAll(".nav-center a");
+    navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+            if (window.innerWidth <= 768 && navbar && navbar.classList.contains("menu-open")) {
+                navbar.classList.remove("menu-open");
+            }
+        });
+    });
+
     // Ekran genişleyince (tablet / desktop) açık menüyü kapat
     window.addEventListener("resize", function () {
         if (window.innerWidth > 768 && navbar && navbar.classList.contains("menu-open")) {
@@ -131,6 +137,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-
-
-

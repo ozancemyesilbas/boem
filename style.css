@@ -3551,13 +3551,25 @@ body {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===========================
    HAMBURGER BUTON – GENEL
    =========================== */
-
 .nav-toggle {
-    display: none;
-    /* desktop’ta gizli */
     margin-left: auto;
     width: 40px;
     height: 40px;
@@ -3567,13 +3579,16 @@ body {
     padding: 0;
     outline: none;
     display: none;
-    /* mobilde açacağız */
+    /* desktop'ta gizli, mobilde açacağız */
+    position: relative;
+    z-index: 1301;
+    /* menü açıkken nav-center'ın üstünde kalsın */
 }
 
 /* 3 çizgi */
 .nav-toggle span {
     display: block;
-    width: 20px;
+    width: 22px;
     height: 2px;
     border-radius: 999px;
     background-color: currentColor;
@@ -3581,14 +3596,13 @@ body {
 }
 
 .nav-toggle span+span {
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
 
 /* ===========================
    MOBİL NAVBAR & MENÜ (≤768px)
    =========================== */
-
 @media (max-width: 768px) {
 
     body {
@@ -3645,7 +3659,7 @@ body {
         transition: transform 0.28s ease, opacity 0.2s ease;
 
         margin-left: 0;
-        /* desktop ayarını ezsin */
+        /* desktop ayarını ez */
     }
 
     .navbar.menu-open .nav-center {
@@ -3682,7 +3696,10 @@ body {
     .nav-item>a {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
+        /* hepsi düzgün hizalansın */
+        gap: 10px;
+        /* ok ile metin arası boşluk */
         width: 100%;
         padding: 4px 0;
         font-size: 1rem;
@@ -3690,21 +3707,22 @@ body {
         text-align: left;
     }
 
+    /* Dropdown olmayanlarda metni aynı hizadan başlat */
+    .nav-item:not(.has-dropdown)>a {
+        padding-left: 18px;
+        /* ok+boşluk kadar içerden */
+    }
+
     /* Desktop’taki alt çizgi efektini kapat */
     .nav-item>a::after {
         content: none;
-    }
-
-    /* Dropdown olmayan maddelerde ok olmasın */
-    .nav-item:not(.has-dropdown)>a span.menu-arrow {
-        display: none;
     }
 
     /* =======================
        DROPDOWN OK İKONLARI
        ======================= */
 
-    /* Ok için ekstra span eklemeden, pseudo ile yapalım */
+    /* Ok için pseudo kullanıyoruz */
     .nav-item.has-dropdown>a::before {
         content: "";
         flex-shrink: 0;
@@ -3714,7 +3732,9 @@ body {
         border-width: 0 2px 2px 0;
         border-color: var(--brand-blue);
         transform: rotate(45deg);
-        margin-left: 8px;
+        margin-right: 8px;
+        /* ok solda, yazıyla arası boşluk */
+        margin-left: 0;
         transition: transform 0.2s ease;
     }
 
