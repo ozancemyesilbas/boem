@@ -14,7 +14,11 @@
 <nav class="navbar">
     <div class="nav-left">
         <a href="index.html" class="logo">
-            <span>Marka</span><span class="logo-accent">Logo</span>
+            <!-- ÜSTTE (transparent navbar iken) görünecek logo -->
+            <img src="assets/logodesb.png" alt="Marka Logo" class="logo-img logo-light">
+    
+            <!-- Aşağı kayınca (navbar-scrolled) görünecek logo -->
+            <img src="assets/logodes.png" alt="Marka Logo" class="logo-img logo-dark">
         </a>
     </div>
 
@@ -34,10 +38,10 @@
                     <a href="Prodüksiyon.html">Prodüksiyon</a>
                 </div>
 
-                <a href="#">Konferans &amp; Fuar Organizasyonu</a>
+                <a href="Konferansfuar.html">Konferans &amp; Fuar Organizasyonu</a>
 
                 <div class="dropdown-item has-submenu">
-                    <a href="Prodüksiyon.html">Sergi &amp; Stand Tasarımları</a>
+                    <a href="SergiStand.html">Sergi &amp; Stand Tasarımları</a>
                     <div class="dropdown-menu submenu">
                         <a href="StandKiralamaÇözümleri.html">Stand Kiralama Çözümleri</a>
                     </div>
@@ -143,7 +147,7 @@
         <div class="portfolio-grid">
             <!-- ===== 1. SAYFA KARTLARI (data-page="1") ===== -->
             <a href="#" class="portfolio-card" data-page="1">
-                <div class="portfolio-card-bg" style="background-image:url('assets/img/work-ausa.jpg');"></div>
+                <div class="portfolio-card-bg" style="background-image:url('assets/proje/f1.jpg');"></div>
                 <div class="portfolio-card-overlay">
                     <h3 class="portfolio-card-title">AUSA</h3>
                     <p class="portfolio-card-sub">250. yıl anma etkinliği için fuar standı deneyimi</p>
@@ -151,7 +155,7 @@
             </a>
 
             <a href="#" class="portfolio-card" data-page="1">
-                <div class="portfolio-card-bg" style="background-image:url('assets/img/work-shoptalk.jpg');"></div>
+                <div class="portfolio-card-bg" style="background-image:url('assets/proje/angr.png');"></div>
                 <div class="portfolio-card-overlay">
                     <h3 class="portfolio-card-title">Shoptalk</h3>
                     <p class="portfolio-card-sub">Perakende inovasyonu için deneyim alanı tasarımı</p>
@@ -159,7 +163,7 @@
             </a>
 
             <a href="#" class="portfolio-card" data-page="1">
-                <div class="portfolio-card-bg" style="background-image:url('assets/img/work-asco.jpg');"></div>
+                <div class="portfolio-card-bg" style="background-image:url('assets/proje/alan3.png');"></div>
                 <div class="portfolio-card-overlay">
                     <h3 class="portfolio-card-title">ASCO</h3>
                     <p class="portfolio-card-sub">Tıp kongresi için sahne ve içerik prodüksiyonu</p>
@@ -167,7 +171,7 @@
             </a>
 
             <a href="#" class="portfolio-card" data-page="1">
-                <div class="portfolio-card-bg" style="background-image:url('assets/img/work-lav.jpg');"></div>
+                <div class="portfolio-card-bg" style="background-image:url('assets/proje/boşalan.png');"></div>
                 <div class="portfolio-card-overlay">
                     <h3 class="portfolio-card-title">LAV</h3>
                     <p class="portfolio-card-sub">Cam markası için “best in glass” sergi alanı</p>
@@ -175,7 +179,7 @@
             </a>
 
             <a href="#" class="portfolio-card" data-page="1">
-                <div class="portfolio-card-bg" style="background-image:url('assets/img/work-nafem.jpg');"></div>
+                <div class="portfolio-card-bg" style="background-image:url('assets/proje/et.png');"></div>
                 <div class="portfolio-card-overlay">
                     <h3 class="portfolio-card-title">The NAFEM Show</h3>
                     <p class="portfolio-card-sub">Endüstriyel mutfak fuarında marka sahnelemesi</p>
@@ -183,13 +187,13 @@
             </a>
 
             <a href="#" class="portfolio-card" data-page="1">
-                <div class="portfolio-card-bg" style="background-image:url('assets/img/work-autodesk.jpg');"></div>
+                <div class="portfolio-card-bg" style="background-image:url('assets/proje/kapı.png');"></div>
                 <div class="portfolio-card-overlay">
                     <h3 class="portfolio-card-title">Autodesk University</h3>
                     <p class="portfolio-card-sub">Katılımcı yolculuğunu yeniden tasarlayan dijital deneyim</p>
                 </div>
             </a>
-
+<!-- ===== 2. SAYFA KARTLARI (data-page="2") 
             <a href="#" class="portfolio-card" data-page="1">
                 <div class="portfolio-card-bg" style="background-image:url('assets/img/work-hardrock.jpg');"></div>
                 <div class="portfolio-card-overlay">
@@ -213,10 +217,11 @@
                     <p class="portfolio-card-sub">AV çözümleriyle sahnelenen perakende deneyimi</p>
                 </div>
             </a>
+            ===== -->
 
             <!-- ===== 2. SAYFA KARTLARI (data-page="2") ===== -->
             <a href="#" class="portfolio-card" data-page="2">
-                <div class="portfolio-card-bg" style="background-image:url('assets/img/work-arizent.jpg');"></div>
+                <div class="portfolio-card-bg" style="background-image:url('assets/proje/birlik.png');"></div>
                 <div class="portfolio-card-overlay">
                     <h3 class="portfolio-card-title">Arizent</h3>
                     <p class="portfolio-card-sub">Finans sektörü için etkileşimli deneyim alanı</p>
@@ -247,6 +252,7 @@
                 </div>
             </a>
         </div>
+    
 
         <!-- Sayfalama -->
         <div class="portfolio-pagination">

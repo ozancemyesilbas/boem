@@ -267,7 +267,28 @@ body {
     transform: translateY(0);
 }
 
+/* LOGO GÖRSELİ GENEL AYAR */
+.logo-img {
+    height: 100px;
+    /* Boyut burada – istersen 32/48 yap */
+    width: auto;
+    display: block;
+}
 
+/* Varsayılan: sadece light logo görünsün */
+.logo-dark {
+    display: none;
+}
+
+/* Navbar aşağı kayınca (navbar-scrolled class'ı gelince)
+   light logo gizlenir, dark logo görünür */
+.navbar-scrolled .logo-light {
+    display: none;
+}
+
+.navbar-scrolled .logo-dark {
+    display: block;
+}
 
 
 
@@ -511,7 +532,7 @@ body {
     position: absolute;
     inset: 0;
     background: #000;
-    /* BURAYA background-image EKLEYEBİLİRSİN */
+    background-image: url("/assets/proje/haditasarlayalım.png");
 }
 
 .design-overlay {
@@ -575,14 +596,16 @@ body {
     position: absolute;
     inset: 0;
     background: #000;
-    /* BURAYA background-image EKLEYEBİLİRSİN */
+    background-image: url("/assets/proje/birlik.png");
+    
+    
 }
 
 .cta-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 20% 20%, rgba(0, 255, 200, 0.4), transparent 60%),
-        rgba(0, 10, 50, 0.85);
+    background: radial-gradient(circle at 20% 20%, rgba(0, 255, 200, 0.425), transparent 60%),
+        rgba(0, 10, 50, 0.571);
 }
 
 .cta-content {
